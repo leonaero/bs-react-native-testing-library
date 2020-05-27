@@ -83,7 +83,7 @@ type renderOptions = {
   "queries": Js.undefined(queries),
 };
 
-[@bs.module "@testing-library/react"]
+[@bs.module "@testing-library/react-native"]
 external cleanup: unit => unit = "cleanup";
 
 let act: (unit => unit) => unit;

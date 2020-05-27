@@ -15,10 +15,10 @@ type renderOptions = {
   "queries": Js.undefined(queries),
 };
 
-[@bs.module "@testing-library/react"]
+[@bs.module "@testing-library/react-native"]
 external cleanup: unit => unit = "cleanup";
 
-[@bs.module "@testing-library/react"]
+[@bs.module "@testing-library/react-native"]
 external _act: (unit => Js.undefined(Js.Promise.t('a))) => unit = "act";
 
 let act = callback =>
@@ -29,7 +29,7 @@ let act = callback =>
     Js.Undefined.empty;
   });
 
-[@bs.module "@testing-library/react"]
+[@bs.module "@testing-library/react-native"]
 external _render: (ReasonReact.reactElement, renderOptions) => renderResult =
   "render";
 
