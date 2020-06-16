@@ -1,7 +1,20 @@
 open DomTestingLibrary;
 
 module FireEvent = {
-  include FireEvent;
+  [@bs.module "@testing-library/react-native"] [@bs.scope "fireEvent"]
+  external _changeText: (Dom.element, Js.undefined(Js.t({..}))) => unit = "abort";
+
+  [@bs.module "@testing-library/react-native"] [@bs.scope "fireEvent"]
+  external _press: (Dom.element, Js.undefined(Js.t({..}))) => unit = "abort";
+
+  [@bs.module "@testing-library/react-native"] [@bs.scope "fireEvent"]
+  external _scroll: (Dom.element, Js.undefined(Js.t({..}))) => unit = "abort";
+
+  let changeText = (~eventInit=?, el) => _changeText(el, Js.Undefined.fromOption(eventInit));
+
+  let press = (~eventInit=?, el) => _press(el, Js.Undefined.fromOption(eventInit));
+
+  let scroll = (~eventInit=?, el) => _scroll(el, Js.Undefined.fromOption(eventInit));
 };
 
 type renderResult;
@@ -15,8 +28,7 @@ type renderOptions = {
   "queries": Js.undefined(queries),
 };
 
-[@bs.module "@testing-library/react-native"]
-external cleanup: unit => unit = "cleanup";
+[@bs.module "@testing-library/react-native"] external cleanup: unit => unit = "cleanup";
 
 [@bs.module "@testing-library/react-native"]
 external _act: (unit => Js.undefined(Js.Promise.t('a))) => unit = "act";
@@ -30,24 +42,20 @@ let act = callback =>
   });
 
 [@bs.module "@testing-library/react-native"]
-external _render: (ReasonReact.reactElement, renderOptions) => renderResult =
-  "render";
+external _render: (ReasonReact.reactElement, renderOptions) => renderResult = "render";
 
 [@bs.get] external container: renderResult => Dom.element = "container";
 
 [@bs.get] external baseElement: renderResult => Dom.element = "baseElement";
 
 [@bs.send.pipe: renderResult]
-external _debug: (Js.undefined(Dom.element), Js.undefined(int)) => unit =
-  "debug";
+external _debug: (Js.undefined(Dom.element), Js.undefined(int)) => unit = "debug";
 
 [@bs.send.pipe: renderResult] external unmount: unit => bool = "unmount";
 
-[@bs.send.pipe: renderResult]
-external rerender: ReasonReact.reactElement => unit = "rerender";
+[@bs.send.pipe: renderResult] external rerender: ReasonReact.reactElement => unit = "rerender";
 
-[@bs.send.pipe: renderResult]
-external asFragment: unit => Dom.element = "asFragment";
+[@bs.send.pipe: renderResult] external asFragment: unit => Dom.element = "asFragment";
 
 // ByLabelText
 [@bs.send.pipe: renderResult]
@@ -64,11 +72,7 @@ external _getByLabelText:
   "getByLabelText";
 
 let getByLabelText = (~matcher, ~options=?, result) =>
-  _getByLabelText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getByLabelText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _getAllByLabelText:
@@ -84,11 +88,7 @@ external _getAllByLabelText:
   "getAllByLabelText";
 
 let getAllByLabelText = (~matcher, ~options=?, result) =>
-  _getAllByLabelText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getAllByLabelText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryByLabelText:
@@ -104,11 +104,7 @@ external _queryByLabelText:
   "queryByLabelText";
 
 let queryByLabelText = (~matcher, ~options=?, result) =>
-  _queryByLabelText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryByLabelText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryAllByLabelText:
@@ -124,11 +120,7 @@ external _queryAllByLabelText:
   "queryAllByLabelText";
 
 let queryAllByLabelText = (~matcher, ~options=?, result) =>
-  _queryAllByLabelText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByLabelText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByLabelText:
@@ -144,11 +136,7 @@ external _findByLabelText:
   "findByLabelText";
 
 let findByLabelText = (~matcher, ~options=?, result) =>
-  _findByLabelText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findByLabelText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findAllByLabelText:
@@ -164,11 +152,7 @@ external _findAllByLabelText:
   "findAllByLabelText";
 
 let findAllByLabelText = (~matcher, ~options=?, result) =>
-  _findAllByLabelText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByLabelText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 // ByPlaceholderText
 [@bs.send.pipe: renderResult]
@@ -185,11 +169,7 @@ external _getByPlaceholderText:
   "getByPlaceholderText";
 
 let getByPlaceholderText = (~matcher, ~options=?, result) =>
-  _getByPlaceholderText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getByPlaceholderText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _getAllByPlaceholderText:
@@ -205,11 +185,7 @@ external _getAllByPlaceholderText:
   "getAllByPlaceholderText";
 
 let getAllByPlaceholderText = (~matcher, ~options=?, result) =>
-  _getAllByPlaceholderText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getAllByPlaceholderText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryByPlaceholderText:
@@ -225,11 +201,7 @@ external _queryByPlaceholderText:
   "queryByPlaceholderText";
 
 let queryByPlaceholderText = (~matcher, ~options=?, result) =>
-  _queryByPlaceholderText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryByPlaceholderText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryAllByPlaceholderText:
@@ -245,11 +217,7 @@ external _queryAllByPlaceholderText:
   "queryAllByPlaceholderText";
 
 let queryAllByPlaceholderText = (~matcher, ~options=?, result) =>
-  _queryAllByPlaceholderText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByPlaceholderText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByPlaceholderText:
@@ -265,11 +233,7 @@ external _findByPlaceholderText:
   "findByPlaceholderText";
 
 let findByPlaceholderText = (~matcher, ~options=?, result) =>
-  _findByPlaceholderText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findByPlaceholderText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findAllByPlaceholderText:
@@ -285,11 +249,7 @@ external _findAllByPlaceholderText:
   "findAllByPlaceholderText";
 
 let findAllByPlaceholderText = (~matcher, ~options=?, result) =>
-  _findAllByPlaceholderText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByPlaceholderText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 // ByText
 [@bs.send.pipe: renderResult]
@@ -354,11 +314,7 @@ external _queryAllByText:
   "queryAllByText";
 
 let queryAllByText = (~matcher, ~options=?, result) =>
-  _queryAllByText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByText:
@@ -390,11 +346,7 @@ external _findAllByText:
   "findAllByText";
 
 let findAllByText = (~matcher, ~options=?, result) =>
-  _findAllByText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 // ByAltText
 [@bs.send.pipe: renderResult]
@@ -427,11 +379,7 @@ external _getAllByAltText:
   "getAllByAltText";
 
 let getAllByAltText = (~matcher, ~options=?, result) =>
-  _getAllByAltText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getAllByAltText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryByAltText:
@@ -447,11 +395,7 @@ external _queryByAltText:
   "queryByAltText";
 
 let queryByAltText = (~matcher, ~options=?, result) =>
-  _queryByAltText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryByAltText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryAllByAltText:
@@ -467,11 +411,7 @@ external _queryAllByAltText:
   "queryAllByAltText";
 
 let queryAllByAltText = (~matcher, ~options=?, result) =>
-  _queryAllByAltText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByAltText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByAltText:
@@ -487,11 +427,7 @@ external _findByAltText:
   "findByAltText";
 
 let findByAltText = (~matcher, ~options=?, result) =>
-  _findByAltText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findByAltText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findAllByAltText:
@@ -507,11 +443,7 @@ external _findAllByAltText:
   "findAllByAltText";
 
 let findAllByAltText = (~matcher, ~options=?, result) =>
-  _findAllByAltText(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByAltText(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 // ByTitle
 [@bs.send.pipe: renderResult]
@@ -544,11 +476,7 @@ external _getAllByTitle:
   "getAllByTitle";
 
 let getAllByTitle = (~matcher, ~options=?, result) =>
-  _getAllByTitle(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getAllByTitle(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryByTitle:
@@ -580,11 +508,7 @@ external _queryAllByTitle:
   "queryAllByTitle";
 
 let queryAllByTitle = (~matcher, ~options=?, result) =>
-  _queryAllByTitle(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByTitle(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByTitle:
@@ -616,11 +540,7 @@ external _findAllByTitle:
   "findAllByTitle";
 
 let findAllByTitle = (~matcher, ~options=?, result) =>
-  _findAllByTitle(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByTitle(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 // ByDisplayValue
 [@bs.send.pipe: renderResult]
@@ -637,11 +557,7 @@ external _getByDisplayValue:
   "getByDisplayValue";
 
 let getByDisplayValue = (~matcher, ~options=?, result) =>
-  _getByDisplayValue(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getByDisplayValue(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _getAllByDisplayValue:
@@ -657,11 +573,7 @@ external _getAllByDisplayValue:
   "getAllByDisplayValue";
 
 let getAllByDisplayValue = (~matcher, ~options=?, result) =>
-  _getAllByDisplayValue(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getAllByDisplayValue(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryByDisplayValue:
@@ -677,11 +589,7 @@ external _queryByDisplayValue:
   "queryByDisplayValue";
 
 let queryByDisplayValue = (~matcher, ~options=?, result) =>
-  _queryByDisplayValue(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryByDisplayValue(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryAllByDisplayValue:
@@ -697,11 +605,7 @@ external _queryAllByDisplayValue:
   "queryAllByDisplayValue";
 
 let queryAllByDisplayValue = (~matcher, ~options=?, result) =>
-  _queryAllByDisplayValue(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByDisplayValue(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByDisplayValue:
@@ -717,11 +621,7 @@ external _findByDisplayValue:
   "findByDisplayValue";
 
 let findByDisplayValue = (~matcher, ~options=?, result) =>
-  _findByDisplayValue(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findByDisplayValue(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findAllByDisplayValue:
@@ -737,11 +637,7 @@ external _findAllByDisplayValue:
   "findAllByDisplayValue";
 
 let findAllByDisplayValue = (~matcher, ~options=?, result) =>
-  _findAllByDisplayValue(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByDisplayValue(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 // ByRole
 [@bs.send.pipe: renderResult]
@@ -806,11 +702,7 @@ external _queryAllByRole:
   "queryAllByRole";
 
 let queryAllByRole = (~matcher, ~options=?, result) =>
-  _queryAllByRole(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByRole(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByRole:
@@ -842,11 +734,7 @@ external _findAllByRole:
   "findAllByRole";
 
 let findAllByRole = (~matcher, ~options=?, result) =>
-  _findAllByRole(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByRole(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 // ByTestId
 [@bs.send.pipe: renderResult]
@@ -879,11 +767,7 @@ external _getAllByTestId:
   "getAllByTestId";
 
 let getAllByTestId = (~matcher, ~options=?, result) =>
-  _getAllByTestId(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _getAllByTestId(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryByTestId:
@@ -899,11 +783,7 @@ external _queryByTestId:
   "queryByTestId";
 
 let queryByTestId = (~matcher, ~options=?, result) =>
-  _queryByTestId(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryByTestId(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _queryAllByTestId:
@@ -919,11 +799,7 @@ external _queryAllByTestId:
   "queryAllByTestId";
 
 let queryAllByTestId = (~matcher, ~options=?, result) =>
-  _queryAllByTestId(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _queryAllByTestId(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
 [@bs.send.pipe: renderResult]
 external _findByTestId:
@@ -955,21 +831,9 @@ external _findAllByTestId:
   "findAllByTestId";
 
 let findAllByTestId = (~matcher, ~options=?, result) =>
-  _findAllByTestId(
-    result,
-    ~matcher,
-    ~options=Js.Undefined.fromOption(options),
-  );
+  _findAllByTestId(result, ~matcher, ~options=Js.Undefined.fromOption(options));
 
-let render =
-    (
-      ~baseElement=?,
-      ~container=?,
-      ~hydrate=?,
-      ~wrapper=?,
-      ~queries=?,
-      element,
-    ) => {
+let render = (~baseElement=?, ~container=?, ~hydrate=?, ~wrapper=?, ~queries=?, element) => {
   let baseElement_ =
     switch (container) {
     | Some(container') => Js.Undefined.return(container')
@@ -990,7 +854,4 @@ let render =
 };
 
 let debug = (~el=?, ~maxLengthToPrint=?, ()) =>
-  _debug(
-    Js.Undefined.fromOption(el),
-    Js.Undefined.fromOption(maxLengthToPrint),
-  );
+  _debug(Js.Undefined.fromOption(el), Js.Undefined.fromOption(maxLengthToPrint));
