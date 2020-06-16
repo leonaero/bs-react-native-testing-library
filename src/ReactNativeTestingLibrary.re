@@ -2,13 +2,13 @@ open DomTestingLibrary;
 
 module FireEvent = {
   [@bs.module "@testing-library/react-native"] [@bs.scope "fireEvent"]
-  external _changeText: (Dom.element, Js.undefined(Js.t({..}))) => unit = "abort";
+  external _changeText: (Dom.element, Js.undefined(Js.t({..}))) => unit = "changeText";
 
   [@bs.module "@testing-library/react-native"] [@bs.scope "fireEvent"]
-  external _press: (Dom.element, Js.undefined(Js.t({..}))) => unit = "abort";
+  external _press: (Dom.element, Js.undefined(Js.t({..}))) => unit = "press";
 
   [@bs.module "@testing-library/react-native"] [@bs.scope "fireEvent"]
-  external _scroll: (Dom.element, Js.undefined(Js.t({..}))) => unit = "abort";
+  external _scroll: (Dom.element, Js.undefined(Js.t({..}))) => unit = "scroll";
 
   let changeText = (~eventInit=?, el) => _changeText(el, Js.Undefined.fromOption(eventInit));
 
