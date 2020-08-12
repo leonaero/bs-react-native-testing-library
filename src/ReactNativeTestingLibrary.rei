@@ -1,5 +1,5 @@
 module FireEvent: {
-  let changeText: (~eventInit: Js.t({..})=?, Dom.element) => unit;
+  let changeText: (~eventInit: Js.t({..})=?, Dom.element, string) => unit;
   let press: (~eventInit: Js.t({..})=?, Dom.element) => unit;
   let scroll: (~eventInit: Js.t({..})=?, Dom.element) => unit;
 };
