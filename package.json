@@ -34,7 +34,7 @@
     "testing"
   ],
   "dependencies": {
-    "@testing-library/react-native": "^5.0.3",
+    "@testing-library/react-native": "^7.0.2",
     "bs-dom-testing-library": "^0.6.2"
   },
   "peerDependencies": {
